@@ -1,5 +1,6 @@
 from functools import reduce
 
+
 def solution(roman):
     """complete the solution by transforming the roman numeral into an integer"""
     r = roman.upper()
@@ -19,7 +20,11 @@ def solution(roman):
 def solution_v2(roman):
     r = roman.upper()
     d = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
-    return reduce(lambda x, y: x + y if x >= y else x - y, (d[c] for c in r))
+    total = reduce(
+        lambda x, y: x + y if x >= y else x - y,
+        (d[r[i]] * -1 if i < len(r) - 1 and d[r[i]] < d[r[i+1]] else d[r[i]] for i in range(len(r)))
+    )
+    return total
 
 
-print(solution('mmxix'))
+print(solution_v2('cciv'))
