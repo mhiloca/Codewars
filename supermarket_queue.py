@@ -16,7 +16,7 @@ def queue_time(customers, n):
 
 
 def queue_time_v1(customers, n):
-    total = [customers.pop(0) for x in range(n)]
+    total = [0 for x in range(n)]
     total = sorted(total)
     while customers:
         total[0] += customers.pop(0)
@@ -31,5 +31,5 @@ def queue_time_v2(customers, n):
     return max(l)
 
 
-nums = [2,2,3,3,4,4]
-print(queue_time_v1(nums, 2))
+nums = [1, 2, 3, 4, 5]
+print(queue_time_v1(nums, 100))
