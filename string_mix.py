@@ -37,9 +37,6 @@ same length sorted in ascending lexicographic order
 (letters and digits - more precisely sorted by codepoint);
 the different groups will be separated by '/'.
 '''
-from itertools import repeat
-from unicodedata import numeric
-
 def mix(s1, s2):
     as1 = ''.join(filter(lambda x: x.islower() , s1))
     as2 = ''.join(filter(lambda x: x.islower(), s2))
@@ -55,10 +52,8 @@ def mix(s1, s2):
         else:
             times = as2.count(l)
             st = '2:'
-        rep = ''.join(list(map(lambda x:''.join(x), zip(repeat(l, times)))))
-        if st+rep+'/' not in rest and times > 1:
-            rep1 = (st, rep, '/')
-            rest.append(rep1)
+        if l not in rest and times > 1:
+            rest.append((st, l*times, '/'))
         rest.sort(key=lambda x: (-len(x[1]), x[0], x[1]))
     return ''.join(map(lambda x: ''.join(x), rest))[:-1]
 
